@@ -6,11 +6,12 @@ import com.example.demo.user.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -30,11 +31,11 @@ public class GroupMembers {
 			
 	)
 	private int id;
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "groupId", referencedColumnName = "id")
+	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+    @JoinColumn(name = "groupId", referencedColumnName = "id",nullable=false)
 	private AssignmentGroup assignmentGroup;
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "memberId", referencedColumnName = "id")
+	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+    @JoinColumn(name = "memberId", referencedColumnName = "id",nullable=false)
 	private User GroupMember;
 	@Column(nullable=false)
 	private long modifiedOn;

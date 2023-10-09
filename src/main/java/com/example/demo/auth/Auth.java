@@ -1,5 +1,7 @@
 package com.example.demo.auth;
 
+import org.json.JSONObject;
+
 import com.example.demo.user.User;
 
 import jakarta.persistence.CascadeType;
@@ -25,21 +27,12 @@ public class Auth {
 	)
 	@GeneratedValue(
 			strategy = GenerationType.SEQUENCE,
-			generator = "auth_sequence"
-			
+			generator = "auth_sequence"	
 	)
 	private int id;
-	@Column(nullable=false)
-	private String email;
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId", referencedColumnName = "id")
+	@OneToOne
+    @JoinColumn(name = "userId", referencedColumnName = "id",nullable=false)
 	private User user;
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	@Column(nullable=false)
 	private String authToken;
 	@Column(nullable=false)
@@ -70,6 +63,18 @@ public class Auth {
 		this.modifiedOn = modifiedOn;
 	}
 	
+	public JSONObject toJson() {
+		JSONObject obj = new JSONObject();
+		obj.put("id", this.id);
+		obj.put("role",this.user.toJson());
+		obj.put("modifiedOn", this.modifiedOn);
+		return obj;
+	}
+
+	@Override
+	public String toString() {
+		return this.toJson().toString();
+	}
 	
 
 }

@@ -8,11 +8,12 @@ import com.example.demo.user.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -28,16 +29,15 @@ public class Incident {
 	@GeneratedValue(
 			strategy = GenerationType.SEQUENCE,
 			generator = "incident_sequence"
-			
 	)
 	private int id;
 	@Column(nullable=false)
 	private String name;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "network_element_Id", referencedColumnName = "id")
+	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@JoinColumn(name = "network_element_Id", referencedColumnName = "id",nullable=false)
 	private NetworkElement networkElement;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "issue_Id", referencedColumnName = "id")
+	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@JoinColumn(name = "issue_Id", referencedColumnName = "id",nullable=false)
 	private Issue issue;
 	@Column(nullable=false)
 	private int severity;
@@ -47,14 +47,14 @@ public class Incident {
 	private String resolution_comment;
 	@Column(nullable=false)
 	private String state;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "assignementGroup_Id", referencedColumnName = "id")
+	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@JoinColumn(name = "assignementGroup_Id", referencedColumnName = "id",nullable=false)
 	private AssignmentGroup assignmentGroup;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "assignedTo_Id", referencedColumnName = "id")
+	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@JoinColumn(name = "assignedTo_Id", referencedColumnName = "id",nullable=false)
 	private User assignedTo;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "raisedBy_Id", referencedColumnName = "id")
+	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@JoinColumn(name = "raisedBy_Id", referencedColumnName = "id",nullable=false)
 	private User raisedBy;
 	@Column(nullable=false)
 	private long modifiedOn;
