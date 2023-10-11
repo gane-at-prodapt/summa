@@ -5,7 +5,12 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,28 +31,41 @@ public class AccessController {
 	}
 	
 	@PostMapping()
-	public String addAccess(@RequestBody Access A) {
+	public ResponseEntity<Access> addAccess(@RequestBody Access A) {
 		Access saved = accessservice.add(A);
 		if(saved!=null) {
-			return saved.toString();
+			return ResponseEntity.ok(saved);
 		}else {
-			JSONObject errorResponse = new JSONObject();
-			errorResponse.put("status", 200);
-			errorResponse.put("message", "failed to add access");
-			return errorResponse.toString();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 	
 	@PostMapping(value="/bulk")
-	public String addAccessBulk(@RequestBody List<Access> accessList) {
+	public ResponseEntity<List<Access>> addAccessBulk(@RequestBody List<Access> accessList) {
 		List<Access> saved = accessservice.addBulk(accessList);
 		if(saved!=null) {
-			return saved.toString();
+			return ResponseEntity.ok(saved);
+		}else {			
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+	
+	@GetMapping(value="/role/{id}")
+	public ResponseEntity<List<Access>> getAccessByRole(@PathVariable("id") int id){
+		List<Access> data = accessservice.getByRole(id);
+		if(data!=null || data.size()!=0) {
+			return ResponseEntity.ok(data);
 		}else {
-			JSONObject errorResponse = new JSONObject();
-			errorResponse.put("status", 200);
-			errorResponse.put("message", "failed to add access");
-			return errorResponse.toString();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+	}
+	@DeleteMapping
+	public ResponseEntity<String> Delete(@RequestBody Access A) {
+		boolean sts =  accessservice.delete(A);
+		if(sts) {
+			return ResponseEntity.ok().build();
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
 	

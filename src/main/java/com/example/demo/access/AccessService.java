@@ -21,4 +21,16 @@ public class AccessService {
 	public List<Access> addBulk(List<Access> A){
 		return accessrepository.saveAll(A);
 	}
+	public List<Access> getByRole(int id){
+		return accessrepository.findByRole(id);
+	}
+	public boolean delete(Access A) {
+		try {
+			accessrepository.delete(A);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+		
+	}
 }

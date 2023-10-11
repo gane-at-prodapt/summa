@@ -3,7 +3,10 @@ package com.example.demo.auth;
 import java.security.NoSuchAlgorithmException;
 
 import org.json.JSONObject;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,32 +29,32 @@ public class AuthController {
 	
 	
 	@PostMapping(value="/login")
-	public String login(@RequestBody String jsonstring) throws NoSuchAlgorithmException{	
+	public ResponseEntity<Auth> login(@RequestBody String jsonstring) throws NoSuchAlgorithmException{	
 		JSONObject authJson = new JSONObject(jsonstring);
 		String token = authJson.getString("token");
 		String email = authJson.getString("email");
 		String digest = Encryption.encrypt(token+email);
 		Auth details = authservice.login(digest);
 		if(details!=null) {
-			return details.toString();
+			return ResponseEntity.ok(details);
 		}else {
 			JSONObject errorResponse = new JSONObject();
 			errorResponse.put("status", 200);
 			errorResponse.put("message", "authentication failed, invalid email or password");
-			return errorResponse.toString();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 	}
 	@PostMapping(value="/add")
-	public String addAuth(@RequestBody Auth A) throws NoSuchAlgorithmException{	
+	public ResponseEntity<Auth> addAuth(@RequestBody Auth A) throws NoSuchAlgorithmException{	
 		A.setAuthToken(Encryption.encrypt(A.getAuthToken()+A.getUser().getEmail()));
 		Auth details = authservice.add(A);
 		if(details!=null) {
-			return details.toString();
+			return ResponseEntity.ok(details);
 		}else {
-			JSONObject errorResponse = new JSONObject();
-			errorResponse.put("status", 200);
-			errorResponse.put("message", "authentication failed, invalid email or password");
-			return errorResponse.toString();
+//			JSONObject errorResponse = new JSONObject();
+//			errorResponse.put("status", 200);
+//			errorResponse.put("message", "authentication failed, invalid email or password");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
 	

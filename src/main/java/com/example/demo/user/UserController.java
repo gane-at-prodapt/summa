@@ -3,6 +3,7 @@ package com.example.demo.user;
 import java.util.List;
 
 import org.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,20 +24,22 @@ public class UserController {
 	}
 	
 	@GetMapping("/all")
-	public String getall(){
-		return userservice.getusers().toString();
+	public ResponseEntity<List<User>> getall(){
+		List<User> all = userservice.getusers();
+		if(all!=null && all.size()!=0) {
+			return ResponseEntity.ok(all);
+		}else {
+			return ResponseEntity.noContent().build();
+		}
 	}
 	
 	@PostMapping
-	public String addUser(@RequestBody User U) {
+	public ResponseEntity<User> addUser(@RequestBody User U) {
 		User saved = userservice.add(U);
 		if(saved!=null) {
-			return saved.toString();
+			return ResponseEntity.ok(saved);
 		}else {
-			JSONObject errorResponse = new JSONObject();
-			errorResponse.put("status", 200);
-			errorResponse.put("message", "failed to add module");
-			return errorResponse.toString();
+			return ResponseEntity.internalServerError().build();
 		}
 	}
 	
