@@ -21,5 +21,20 @@ public class AuthService {
 		// TODO Auto-generated method stub
 		return authrepository.save(a);
 	}
+	
+	public boolean delete(Auth a) {
+		try {
+			authrepository.delete(a);
+			return true;
+		}catch(Exception E) {
+			return false;
+		}
+	}
+	
+	public Auth put(Auth A) {
+		Auth forid = authrepository.findByUid(A.getUser().getId());
+		A.setId(forid.getId());
+		return authrepository.save(A);
+	}
 
 }

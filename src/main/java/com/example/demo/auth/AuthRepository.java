@@ -7,5 +7,8 @@ public interface AuthRepository extends JpaRepository<Auth,Integer>{
 	@Query(value="select * from auth a where auth_token=?1",nativeQuery=true)
 	public Auth findByToken(String token);
 	
+	@Query(value="select * from auth a where userId=?1",nativeQuery=true)
+	public Auth findByUid(int userId);
+	
 	
 }
