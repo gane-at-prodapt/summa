@@ -33,10 +33,10 @@ public class Incident {
 	private int id;
 	@Column(nullable=false)
 	private String name;
-	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@ManyToOne
 	@JoinColumn(name = "network_element_Id", referencedColumnName = "id",nullable=false)
 	private NetworkElement networkElement;
-	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@ManyToOne
 	@JoinColumn(name = "issue_Id", referencedColumnName = "id",nullable=false)
 	private Issue issue;
 	@Column(nullable=false)
@@ -47,13 +47,13 @@ public class Incident {
 	private String resolution_comment;
 	@Column(nullable=false)
 	private String state;
-	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@ManyToOne
 	@JoinColumn(name = "assignementGroup_Id", referencedColumnName = "id",nullable=false)
 	private AssignmentGroup assignmentGroup;
-	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@ManyToOne
 	@JoinColumn(name = "assignedTo_Id", referencedColumnName = "id",nullable=false)
 	private User assignedTo;
-	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@ManyToOne
 	@JoinColumn(name = "raisedBy_Id", referencedColumnName = "id",nullable=false)
 	private User raisedBy;
 	@Column(nullable=false)

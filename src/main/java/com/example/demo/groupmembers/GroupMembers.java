@@ -31,10 +31,10 @@ public class GroupMembers {
 			
 	)
 	private int id;
-	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@ManyToOne
     @JoinColumn(name = "groupId", referencedColumnName = "id",nullable=false)
 	private AssignmentGroup assignmentGroup;
-	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@ManyToOne
     @JoinColumn(name = "memberId", referencedColumnName = "id",nullable=false)
 	private User GroupMember;
 	@Column(nullable=false)
