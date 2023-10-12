@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer>{
 	
-//	@Query("SELECT u FROM User u, Auth a WHERE u.id = a.id AND a.token=:token")
-//    List<User> findByGenre(@Param("token") String token);
-
+	@Query(value="select * from user where roleId=?1", nativeQuery = true)
+	public List<User> finduserbyroleid(int id);
 }

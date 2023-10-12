@@ -1,5 +1,7 @@
 package com.example.demo.role;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,16 @@ public class RoleService {
 	
 	public Role addRole(Role R) {
 		return rolerepository.save(R);
+	}
+	
+	public Role updateRole(Role R)
+	{
+		return rolerepository.save(R);
+	}
+	
+	public List<Role> getallRole()
+	{
+		return rolerepository.findAll();
 	}
 
 }
