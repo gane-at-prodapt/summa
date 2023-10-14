@@ -94,8 +94,8 @@ public class Access {
 	public JSONObject toJson() {
 		JSONObject obj = new JSONObject();
 		obj.put("id", this.id);
-		obj.put("role",this.role.toJson());
-		obj.put("module",this.module.toJson());
+//		obj.put("role",this.role.toJson());
+//		obj.put("module",this.module.toJson());
 		obj.put("status",this.status);
 		obj.put("modifiedOn", this.modifiedOn);
 		return obj;

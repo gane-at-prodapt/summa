@@ -31,10 +31,6 @@ public class Issue {
 	@Column(nullable=false)
 	private String description;
 	@Column(nullable=false)
-	private int severity;
-	@Column(nullable=false)
-	private int priority;
-	@Column(nullable=false)
 	private long modifiedOn;
 	
 	public int getId() {
@@ -60,18 +56,6 @@ public class Issue {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public int getSeverity() {
-		return severity;
-	}
-	public void setSeverity(int severity) {
-		this.severity = severity;
-	}
-	public int getPriority() {
-		return priority;
-	}
-	public void setPriority(int priority) {
-		this.priority = priority;
 	}
 	public long getModifiedOn() {
 		return modifiedOn;

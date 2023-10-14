@@ -6,13 +6,14 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 @Configuration
 public class RoleConfig {
 	
 	private static String roles[]= {"Super Admin", "Network Admin","Network Engineer","Support Analyst","Observer"};
 	
-	@Bean
+	@Bean("Role")
 	CommandLineRunner commandLineRunner(
 	RoleRepository repo	){
 		return args -> {

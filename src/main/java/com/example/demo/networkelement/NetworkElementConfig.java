@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 @Configuration
 public class NetworkElementConfig {
@@ -14,9 +15,9 @@ public class NetworkElementConfig {
 	//device: router
 	//ipv4: 192.0.8.1
 	//mac: 00-B0-D0-01-26
-	private static String network_family[] = {"Broadband cable", "Modem", "Router", "Wireless access point", "Ethernet Cable", "Opical Network terminal", "Splitter", "Fiber Optic cable"};
+	private static String network_family[] = {"Broadband cable","Wireless dongle", "Modem", "Router", "Ethernet Cable", "Wireless access point", "Opical Network terminal", "Splitter", "Fiber Optic cable","Network switch"};
 	
-	@Bean
+	@Bean("networkelement")
 	CommandLineRunner commandLineRunner(
 			NetworkElementRepository repo) {
 		return args -> {

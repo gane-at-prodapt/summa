@@ -35,6 +35,7 @@ public class Module {
 	private String name;
 	@Column(nullable=false)
 	private long createdOn;
+	
 	@OneToMany
 	private List<Access> accessList;
 	
@@ -62,6 +63,8 @@ public class Module {
 		obj.put("id", this.id);
 		obj.put("name",this.name);
 		obj.put("createdOn",this.createdOn);
+		obj.put("access", this.accessList);
+		obj.put("access", accessList);
 		return obj;
 	}
 

@@ -5,9 +5,15 @@ import java.util.List;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 
 import com.example.demo.role.Role;
+import com.example.demo.role.RoleRepository;
+
+import jakarta.transaction.Transactional;
+
 import com.example.demo.module.Module;
+import com.example.demo.module.ModuleRepository;
 
 @Configuration
 public class AccessConfig {
@@ -15,40 +21,27 @@ public class AccessConfig {
 	private static String roles[]= {"Super Admin", "Network Admin","Network Engineer","Support Analyst","Observer"};
 	private static String modules[] = {"Network", "Component", "Incident", "Group","Issue","Role","User", "Module"};
 	
-	@Bean
+	@Bean("Access")
 	CommandLineRunner commandlinerunner(
-			AccessRepository repo )
+			AccessRepository repo, RoleRepository Rrepo, ModuleRepository Mrepo)
 	{
 		return args ->
 		{
 
-			Role R1 = new Role();
-			R1.setId(1);
-			Role R2 = new Role();
-			R1.setId(2);
-			Role R3 = new Role();
-			R1.setId(3);
-			Role R4 = new Role();
-			R1.setId(4);
-			Role R5 = new Role();
-			R1.setId(5);
+			Role R1 = Rrepo.getById(1);
+			Role R2 = Rrepo.getById(2);
+			Role R3 = Rrepo.getById(3);
+			Role R4 = Rrepo.getById(4);
+			Role R5 = Rrepo.getById(5);
 			
-			Module M1 = new Module();
-			M1.setId(1);
-			Module M2= new Module();
-			M2.setId(2);
-			Module M3= new Module();
-			M3.setId(3);
-			Module M4= new Module();
-			M4.setId(4);
-			Module M5= new Module();
-			M4.setId(5);
-			Module M6= new Module();
-			M6.setId(6);
-			Module M7= new Module();
-			M7.setId(7);
-        	Module M8= new Module();
-			M8.setId(8);
+			Module M1 = Mrepo.getById(1);
+			Module M2 = Mrepo.getById(2);
+			Module M3 = Mrepo.getById(3);
+			Module M4 = Mrepo.getById(4);
+			Module M5 = Mrepo.getById(5);
+			Module M6 = Mrepo.getById(6);
+			Module M7 = Mrepo.getById(7);
+        	Module M8 = Mrepo.getById(8);
 			
 			// Super Admin Access
 			Access A11 = new Access();
@@ -342,8 +335,6 @@ public class AccessConfig {
 					A11,A12,A13,A14,A15,A16,A17,A18,A21,A22,A23,A24,A25,A26,A27,A28,
 					A31,A32,A33,A34,A35,A36,A37,A38,A41,A42,A43,A44,A45,A46,A47,A48,
 					A51,A52,A53,A54,A55,A56,A57,A58
-					
-					
 					));
 			
 		};
