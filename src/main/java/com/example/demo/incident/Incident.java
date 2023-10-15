@@ -43,7 +43,7 @@ public class Incident {
 	private int severity;
 	@Column(nullable=false)
 	private int priority;
-	@Column(nullable=false)
+	
 	private String resolution_comment;
 	@Column(nullable=false)
 	private String state;
@@ -51,7 +51,7 @@ public class Incident {
 	@JoinColumn(name = "assignementGroup_Id", referencedColumnName = "id",nullable=false)
 	private AssignmentGroup assignmentGroup;
 	@ManyToOne
-	@JoinColumn(name = "assignedTo_Id", referencedColumnName = "id",nullable=false)
+	@JoinColumn(name = "assignedTo_Id", referencedColumnName = "id")
 	private User assignedTo;
 	@ManyToOne
 	@JoinColumn(name = "raisedBy_Id", referencedColumnName = "id",nullable=false)
