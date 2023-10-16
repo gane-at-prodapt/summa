@@ -21,5 +21,4 @@ public interface IncidentRepository extends JpaRepository<Incident,Integer>{
 	@Query(value="select * from incident where ?1",nativeQuery=true)
 	public List<Incident> findIncidentsbyMemberGroups(String query);
 	
-	
 }

@@ -49,7 +49,7 @@ public class IncidentService {
 		List<GroupMembers> groups = grpmemservice.getGroupsByMember(memberId);
 		List<String> part_of_query = new ArrayList<String>();
 		for(GroupMembers group : groups) {
-			part_of_query.add("assignmentGroup_Id="+group.getId());
+			part_of_query.add("assignment_group_id="+group.getId());
 		}
 		String part = String.join(" or ", part_of_query);
 		return incidentrepo.findIncidentsbyMemberGroups(part);
