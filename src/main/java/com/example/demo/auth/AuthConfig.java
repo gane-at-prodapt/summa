@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 
+import com.example.demo.encryption.Encryption;
 import com.example.demo.user.User;
 
 @Configuration
@@ -23,7 +24,7 @@ public class AuthConfig {
 				u.setId(userids[i]);
 				u.setEmail("user"+userids[i]+"@gmail.com");
 				A.setUser(u);
-				A.setAuthToken("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
+				A.setAuthToken(Encryption.encrypt("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"+"user"+userids[i]+"@gmail.com"));
 				A.setModifiedOn(System.currentTimeMillis()/1000);
 				authList.add(A);
 			}
