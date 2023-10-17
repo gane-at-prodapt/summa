@@ -47,12 +47,11 @@ public class IncidentService {
 		return incidentrepo.findIncidentsbyIssue(issueId);
 	}
 	public List<Incident> getByMembergroups(int memberId){
+		List<Incident> incidents = new ArrayList<Incident>();
 		List<GroupMembers> groups = grpmemservice.getGroupsByMember(memberId);
-		List<String> part_of_query = new ArrayList<String>();
 		for(GroupMembers group : groups) {
-			part_of_query.add("assignment_group_id="+group.getId());
+			incidents.addAll(this.getByGroup(group.getGroup().getId()));
 		}
-		String part = String.join(" or ", part_of_query);
-		return incidentrepo.findIncidentsbyMemberGroups(part);
+		return incidents;
 	}
 }
