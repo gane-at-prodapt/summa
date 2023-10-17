@@ -22,6 +22,10 @@ public class NetworkElementService {
 		return networkelementrepo.findAll();
 	}
 	
+	public List<NetworkElement> getByFamily(String family){
+		return networkelementrepo.findNetworkElementsByFamily(family);
+	}
+	
 	
 	
 }

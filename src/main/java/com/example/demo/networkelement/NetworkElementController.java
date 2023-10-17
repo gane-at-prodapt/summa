@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,26 @@ public class NetworkElementController {
 	public ResponseEntity<List<NetworkElement>> getall()
 	{
 		List<NetworkElement> Elements= networkelementtservice.getall();
+		if(Elements!=null) {
+			if(Elements.size()!=0) {
+				return ResponseEntity.ok(Elements);
+				
+			}
+			else
+			{
+				return ResponseEntity.noContent().build();
+			}
+		}
+		else
+		{
+			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	@GetMapping(value="/{family}")
+	public ResponseEntity<List<NetworkElement>> getNetworkDevices(@PathVariable("family") String family)
+	{
+		List<NetworkElement> Elements= networkelementtservice.getByFamily(family);
 		if(Elements!=null) {
 			if(Elements.size()!=0) {
 				return ResponseEntity.ok(Elements);
