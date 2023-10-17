@@ -59,6 +59,20 @@ public class UserController {
 				return ResponseEntity.notFound().build();
 			}
 		}
+	@GetMapping(value="/{id}")
+	public ResponseEntity<User> getuserById(@PathVariable("id") int id )
+	{
+		System.out.println(id);
+		User user= userservice.getUserById(id);
+		if( user!= null)
+		{
+			return ResponseEntity.ok(user);
+		}
+		else
+		{
+			return ResponseEntity.notFound().build();
+		}
+	}
 		
 	
 	
