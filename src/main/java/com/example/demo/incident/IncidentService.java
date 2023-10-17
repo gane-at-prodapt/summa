@@ -15,8 +15,9 @@ public class IncidentService {
 	private GroupMembersService grpmemservice;
 	
 	@Autowired
-	public IncidentService(IncidentRepository incidentRepository) {
+	public IncidentService(IncidentRepository incidentRepository, GroupMembersService grpmemservice ) {
 		this.incidentrepo=incidentRepository;
+		this.grpmemservice= grpmemservice;
 	}
 	
 	public Incident addIncident(Incident I) {
