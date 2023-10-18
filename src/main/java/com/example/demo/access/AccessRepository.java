@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AccessRepository extends JpaRepository<Access,Integer>{
-	@Query(value="select * from access a where roleId=?1",nativeQuery=true)
+	@Query(value="select * from access a where role_id=?1",nativeQuery=true)
 	public List<Access> findByRole(int id);
 }
