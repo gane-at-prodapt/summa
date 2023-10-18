@@ -28,7 +28,8 @@ public class GroupMembersController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<GroupMembers> addAuth(@RequestBody GroupMembers G) throws NoSuchAlgorithmException{	
+	public ResponseEntity<GroupMembers> addAuth(@RequestBody GroupMembers G) {	
+		
 		GroupMembers saved = groupmemberservice.add(G);
 		if(saved!=null) {
 			return ResponseEntity.ok(saved);
