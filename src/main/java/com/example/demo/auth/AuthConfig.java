@@ -13,18 +13,24 @@ import com.example.demo.user.User;
 
 @Configuration
 public class AuthConfig {
-	private int[] userids = {1,2,3,4,5,6,7,8,9,10};
+	private String names[] = {"Stefan","Luffy","Erwin","Rebecca","Walter",
+			"Klaus","Conrad","Kevin","Michael","Barney",
+			"Marshall","Robin","Skyler","Jennie","Monica",
+			"Dwight","Leonard","Sheldon","Howard","Roger"};
+	
 	@Bean("Auth")
 	CommandLineRunner commandLineRunner(AuthRepository repo) {
 		return args->{
 			List<Auth> authList = new ArrayList<Auth>();
-			for(int i=0;i<userids.length;i++) {
+			for(int i=0;i<names.length;i++) {
 				Auth A = new Auth();
 				User u = new User();
-				u.setId(userids[i]);
-				u.setEmail("user"+userids[i]+"@gmail.com");
+				u.setId(i+1);
+				//set email by name
+				u.setName(names[i]);
+				u.setEmail(names[i]+"11"+Integer.toString(i)+"@gmail.com");
 				A.setUser(u);
-				A.setAuthToken(Encryption.encrypt("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"+"user"+userids[i]+"@gmail.com"));
+				A.setAuthToken(Encryption.encrypt("5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"+names[i]+"11"+Integer.toString(i)+"@gmail.com"));
 				A.setModifiedOn(System.currentTimeMillis()/1000);
 				authList.add(A);
 			}
