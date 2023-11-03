@@ -136,7 +136,7 @@ public class AccessConfig {
 			Access A26= new Access();
 			A26.setRole(R2);
 			A26.setModule(M6);
-			A26.setStatus("write");
+			A26.setStatus("read");
 			A26.setModifiedOn(System.currentTimeMillis()/1000);
 			
 			
